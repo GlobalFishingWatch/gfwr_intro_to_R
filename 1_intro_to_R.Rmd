@@ -8,6 +8,7 @@ institute: "Global Fishing Watch"
 date: '27 octobre 2025'
 output:
   xaringan::moon_reader:
+    self-contained: true
     css: ["xaringan-themer.css"]
     nature:
       slideNumberFormat: ""
@@ -62,8 +63,8 @@ xaringanthemer::style_duo_accent(
 ```
 
 + Overview to R and RStudio
++ Setup and project organization
 + Introduction to R
-+ Starting with Data
 + Exploratory data analysis and basic statistics with R
 + Manipulating Data Frames with __dplyr__
 + Data visualisation with `ggplot2`
@@ -114,10 +115,6 @@ class: inverse, middle, center
 
 + __an active and welcoming community__:  email lists, Stack Overflow, [RStudio community](community.rstudio.com/), useR groups, .purple[R-Ladies+] chapters, Slack communities, `#rstats`
 
-<center>
-```{r remedy001, out.width=150, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
-```
 
 ---
 ## `R` has a modular structure: __packages__
@@ -469,10 +466,6 @@ max(heights, na.rm = TRUE)
 --
 
 + __data frames__: two-dimensional arrays but might be of combined types (i.e., column 1 with names, column 2 with numbers)
-
---
-
-+ __arrays__ are similar to matrices and dataframes but may be three-dimensional ("layered" data frames)
 
 --
 
