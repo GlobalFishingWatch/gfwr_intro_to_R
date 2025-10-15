@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction à R et RStudio</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andrea Sánchez-Tapia" />
+    <meta name="author" content="Rocío Joo" />
+    <script src="1_intro_to_R_fr_files/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introduction à R et RStudio
+]
+.subtitle[
+## Analyse et visualisation de données sur R
+]
+.author[
+### Andrea Sánchez-Tapia
+]
+.author[
+### Rocío Joo
+]
+.institute[
+### Global Fishing Watch
+]
+.date[
+### 27 octobre 2025
+]
+
+---
+
+background-image: url("figs/GFW_PRIMARY_RGB.png")
+background-position: 93% 95%
+background-size: 250px
+
+
+# Plan
+
+
+
+
+
++ Introduction à R et RStudio
++ Commencer avec les données
++ Analyse exploratoire des données et statistiques de base avec R
++ Manipulation des tableaux de données avec __dplyr__
++ Visualisation des données avec `ggplot2`
+
+---
+class: inverse, middle, center
+
+#  Introduction à R et RStudio
+
+---
+
+## Pourquoi apprendre le langage `R`?
+
++ Le langage de prédilection des statisticiens et des chercheurs dans plusieurs domaines
+
+--
+
++ **Software _libre_**: _gratuit_ et _libre_ d'être utilisé et modifié -&gt; l'un des piliers de la __science ouverte__
+
+--
+
++ __Basé sur des scripts__: reproductibilité, grand volume de données et analyses, __transparence__, suivi des erreurs, excellent moyen d'apprendre les méthodes.
+
+--
+
++ __Interdisciplinaire et modulaire__ : beaucoup de code écrit par des spécialistes du domaine. Au cœur de sa philosophie se trouve une transition en douceur de l'utilisateur au programmeur.
+
+--
+
++ __Communication__ avec d'autres outils : manuscrits, présentations, applications, rapports
+
+---
+## Pourquoi apprendre `R` ?
+
++ Communication avec __d'autres langages de programmation__ (par exemple, `reticulate` pour exécuter des scripts Python) 
+
+--
+
++ Super __capacités graphiques__!
+
+--
+
+
++ __Support officiel__ : plein de façons de trouver une aide dans la documentation, listes de diffusion
+
+--
+
++ __Une communauté active et accueillante__ :  listes de diffusion, Stack Overflow, [communauté RStudio](community.rstudio.com/), [groupes useR](https://r-community.github.io/user-groups/rugs.html), sections [.purple[R-Ladies+]](https://r-community.github.io/user-groups/rladies.html), communautés Slack, `#rstats`
+
+
+---
+## `R` a une structure modulaire : __packages__
+
+
++ L'installation de `R` __base__ comprend les packages de base développés et entretenus par l'équipe de développement __`R` Core Development Team__
+
+--
+
++ Les autres packages sont créés par la communauté et hébergés dans __CRAN__ (The Comprehensive `R` Archive Network), Bioconductor, __GitHub__ et rOpenSci.org's R-Universe
+
+--
+
++ Pour installer des packages depuis CRAN : `install.packages("dplyr")`
+
++ Pour installer des packages depuis GitHub:`remotes::install_github("GlobalFishingWatch/gfwr")`
+
+---
+
++ Pour installer des packages depuis R-universe:
+
+&lt;small&gt;
+
+```r
+install.packages("gfwr", 
+repos = c("https://globalfishingwatch.r-universe.dev",
+"https://cran.r-project.org"))`
+```
+
+---
+background-image:url("figs/00_rstudio.png")
+background-size: 70%
+background-position: 90% 90%
+
+# Exécuter R dans RStudio
+
+
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"&gt;&lt;/path&gt;&lt;/svg&gt;
+
+---
+class: inverse, middle, center
+# Configuration et organisation du projet
+
+---
+## Répertoire de travail
+
++ Vous devez indiquer à R où vous allez travailler, afin qu'il sache où lire les fichiers, où enregistrer les résultats, etc. : __répertoire de travail__
+
+--
+
++ `getwd()` dans la console
+
+--
+
++ La valeur par défaut est __"home "__ : vérifiez les options générales et l'onglet "Fichier"
+
+
+--
+
++ Vous pouvez indiquer à R et RStudio où vous souhaitez travailler avec `setwd()`
+
+--
+
++ Encore mieux : au lieu d'ouvrir RStudio, ouvrez un script __R__ ou un projet __RStudio__ (comme vous le feriez dans MS Word) &lt;svg viewBox="0 0 384 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm220.1-208c-5.7 0-10.6 4-11.7 9.5-20.6 97.7-20.4 95.4-21 103.5-.2-1.2-.4-2.6-.7-4.3-.8-5.1.3.2-23.6-99.5-1.3-5.4-6.1-9.2-11.7-9.2h-13.3c-5.5 0-10.3 3.8-11.7 9.1-24.4 99-24 96.2-24.8 103.7-.1-1.1-.2-2.5-.5-4.2-.7-5.2-14.1-73.3-19.1-99-1.1-5.6-6-9.7-11.8-9.7h-16.8c-7.8 0-13.5 7.3-11.7 14.8 8 32.6 26.7 109.5 33.2 136 1.3 5.4 6.1 9.1 11.7 9.1h25.2c5.5 0 10.3-3.7 11.6-9.1l17.9-71.4c1.5-6.2 2.5-12 3-17.3l2.9 17.3c.1.4 12.6 50.5 17.9 71.4 1.3 5.3 6.1 9.1 11.6 9.1h24.7c5.5 0 10.3-3.7 11.6-9.1 20.8-81.9 30.2-119 34.5-136 1.9-7.6-3.8-14.9-11.6-14.9h-15.8z"&gt;&lt;/path&gt;&lt;/svg&gt;)
+
+---
+## Organisation des projets et meilleures pratiques
+
++ Les projets sont mieux organisés si nous utilisons __un dossier par projet__ et  __des sous-dossiers__ dans notre répertoire de travail
+
+--
+
++ Nous ne devrions pas modifier des __fichiers de données brutes__ mais plutôt __enregistrer les données traitées__ dans un autre fichier (et les scripts correspondants qui ont modifié les données)
+
+--
+
++ Éviter les chemins absolus: `C:users/your_name/your_file_structure/your_working_directory`
+
+--
+
++ Au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__ :
+
+  + `.` "ici"
+  + `./figs` un sous-dossier appelé `figs`
+  + le niveau supérieur `..`
+  
+---
+class: inverse, middle, center
+
+## Projets RStudio
+
+Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets
+
+---
+## Introduction à R
+
++ `&lt;-` est l'opération pour créer des objets, qui sont sauvés temporairement dans l'espace de travail (le _workspace_)
+(`Alt + -`)
+
+--
+
++ Le remplacement d'objets __n'affecte pas les autres objets__
+
+--
+
++ Vous pouvez voir quels objets sont enregistrés dans l'espace de travail en utilisant `ls()`
+
+---
+
+## À propos de l'espace de travail
+
++ R crée des __objets__ qui occupent la mémoire RAM : l' __espace de travail__
+
+--
+
++ L' __espace de travail__ peut être enregistré et chargé entre les sessions, MAIS
+
+--
+
++ __vous pouvez perdre la trace de la manière dont vous avez créé les objets dans l'espace de travail__
+
+
+--
+
++ `#Bonnes pratiques` ne pas enregistrer l'espace de travail
+
+---
+background-image:url("figs/0a_setup.png")
+background-size: 60%
+background-position: 100% 100%
+
+.pull-left[in the general options]
+
+
+---
+class: center, middle
+# ¡Thanks!
+
+Ce module a été adapté à partir de documents antérieurs créés par [¡liibre!](https://github.com/liibre)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "slideNumberFormat": "",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "ratio": "16:9",
+  "countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
