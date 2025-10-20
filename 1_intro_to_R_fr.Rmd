@@ -22,7 +22,7 @@ background-position: 93% 95%
 background-size: 250px
 
 
-# plan
+# Plan
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
@@ -62,8 +62,7 @@ xaringanthemer::style_duo_accent(
 #xaringanExtra::use_share_again()
 ```
 
-+ Présentation de R et RStudio
-+ Introduction à R
++ Introduction à R et RStudio
 + Commencer avec les données
 + Analyse exploratoire des données et statistiques de base avec R
 + Manipulation des tableaux de données avec __dplyr__
@@ -72,47 +71,47 @@ xaringanthemer::style_duo_accent(
 ---
 class: inverse, middle, center
 
-#  présentation générale de R et RStudio
+#  Introduction à R et RStudio
 
 ---
 
 ## Pourquoi apprendre le langage `R`?
 
-+ le langage de prédilection des statisticiens et des chercheurs dans plusieurs domaines
++ Le langage de prédilection des statisticiens et des chercheurs dans plusieurs domaines
 
 --
 
-+ **software _libre_**: _gratuit_ et _libre_ d'être utilisé et modifié -> l'un des piliers de la __science ouverte__
++ **Software _libre_**: _gratuit_ et _libre_ d'être utilisé et modifié -> l'un des piliers de la __science ouverte__
 
 --
 
-+ __Basé sur des scripts__: reproductibilité, grand volume de données et analyses, __transparence__ (suivi des erreurs), excellent moyen d'apprendre les méthodes.
++ __Basé sur des scripts__: reproductibilité, grand volume de données et analyses, __transparence__, suivi des erreurs, excellent moyen d'apprendre les méthodes.
 
 --
 
-+ __interdisciplinaire et modulaire__ : beaucoup de code écrit par des spécialistes du domaine. Au cœur de sa philosophie se trouve une transition en douceur de l'utilisateur au programmeur.
++ __Interdisciplinaire et modulaire__ : beaucoup de code écrit par des spécialistes du domaine. Au cœur de sa philosophie se trouve une transition en douceur de l'utilisateur au programmeur.
 
 --
 
-+ __communication__ avec d'autres outils : manuscrits, présentations, applications, rapports
++ __Communication__ avec d'autres outils : manuscrits, présentations, applications, rapports
 
 ---
 ## Pourquoi apprendre `R` ?
 
-+ communication avec __d'autres langages de programmation__ (par exemple, `reticulate` pour exécuter des scripts Python) 
++ Communication avec __d'autres langages de programmation__ (par exemple, `reticulate` pour exécuter des scripts Python) 
 
 --
 
-+ super __capacités graphiques__!
++ Super __capacités graphiques__!
 
 --
 
 
-+ __support officiel__ : plein de façons de trouver une aide dans la documentation, listes de diffusion
++ __Support officiel__ : plein de façons de trouver une aide dans la documentation, listes de diffusion
 
 --
 
-+ __une communauté active et accueillante__ :  listes de diffusion, Stack Overflow, [communauté RStudio](community.rstudio.com/), groupes useR, sections .purple[R-Ladies+], communautés Slack, `#rstats`
++ __Une communauté active et accueillante__ :  listes de diffusion, Stack Overflow, [communauté RStudio](community.rstudio.com/), [groupes useR](https://r-community.github.io/user-groups/rugs.html), sections [.purple[R-Ladies+]](https://r-community.github.io/user-groups/rladies.html), communautés Slack, `#rstats`
 
 
 ---
@@ -123,7 +122,7 @@ class: inverse, middle, center
 
 --
 
-+ Les autres packages sont créés par la communauté et hébergés dans __CRAN__ (The Comprehensive `R` Archive Network) ou Bioconductor, __GitHub__ et rOpenSci.org's R-Universe
++ Les autres packages sont créés par la communauté et hébergés dans __CRAN__ (The Comprehensive `R` Archive Network), Bioconductor, __GitHub__ et rOpenSci.org's R-Universe
 
 --
 
@@ -133,7 +132,7 @@ class: inverse, middle, center
 
 ---
 
-+ pour installer des packages depuis R-universe:
++ Pour installer des packages depuis R-universe:
 
 <small>
 
@@ -158,9 +157,9 @@ class: inverse, middle, center
 # Configuration et organisation du projet
 
 ---
-## répertoire de travail
+## Répertoire de travail
 
-+ vous devez indiquer à R où vous allez travailler, afin qu'il sache où lire les fichiers, où enregistrer les résultats, etc. : __répertoire de travail__
++ Vous devez indiquer à R où vous allez travailler, afin qu'il sache où lire les fichiers, où enregistrer les résultats, etc. : __répertoire de travail__
 
 --
 
@@ -168,16 +167,16 @@ class: inverse, middle, center
 
 --
 
-+ la valeur par défaut est __"home "__ : vérifiez les options générales et l'onglet "Fichier"
++ La valeur par défaut est __"home "__ : vérifiez les options générales et l'onglet "Fichier"
 
 
 --
 
-+ vous pouvez indiquer à R et RStudio où vous souhaitez travailler `setwd()`
++ Vous pouvez indiquer à R et RStudio où vous souhaitez travailler avec `setwd()`
 
 --
 
-+ encore mieux : au lieu d'ouvrir RStudio, ouvrez un script __R__ ou un projet __RStudio__ (comme vous le feriez dans MS Word) `r icons::fontawesome("file-word")`)
++ Encore mieux : au lieu d'ouvrir RStudio, ouvrez un script __R__ ou un projet __RStudio__ (comme vous le feriez dans MS Word) `r icons::fontawesome("file-word")`)
 
 ---
 ## Organisation des projets et meilleures pratiques
@@ -186,57 +185,26 @@ class: inverse, middle, center
 
 --
 
-+ nous ne devrions pas modifier __fichiers de données brutes__ mais __enregistrer les données traitées__ (et les scripts correspondants qui ont modifié les données)
++ Nous ne devrions pas modifier des __fichiers de données brutes__ mais plutôt __enregistrer les données traitées__ dans un autre fichier (et les scripts correspondants qui ont modifié les données)
 
 --
 
-+ au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__ :
++ Éviter les chemins absolus: `C:users/your_name/your_file_structure/your_working_directory`
+
+--
+
++ Au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__ :
 
   + `.` "ici"
   + `./figs` un sous-dossier appelé `figs`
   + le niveau supérieur `..`
   
---
-
-+ éviter les chemins absolus: `C:users/your_name/your_file_structure/your_working_directory`
-
 ---
-## Dans cette session et les suivantes
+class: inverse, middle, center
 
-
-```
-project/
-*    ├── data/
-*    │   ├── raw
-*    │   └── processed
-     ├── docs/
-*    ├── figs/
-     ├── R/
-*    ├── output/
-*    └── README.md
-```
-
-+ Décompressez le fichier .zip dans un dossier de votre choix
-
-<right>
-`r icons::fontawesome("laptop-code")`
-</right>
-
----
 ## Projets RStudio
 
 Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets
-
---
-
-```{r gif, out.width=300, echo = FALSE, fig.align='center'}
-knitr::include_graphics("https://media.giphy.com/media/3oriO04qxVReM5rJEA/giphy.gif")
-```
-
-
----
-class:middle, inverse, center
-# introduction to R 
 
 ---
 ## Introduction à R
@@ -246,20 +214,11 @@ class:middle, inverse, center
 
 --
 
-+ le remplacement d'objets __n'affecte pas les autres objets__
++ Le remplacement d'objets __n'affecte pas les autres objets__
 
 --
 
-+  __Conseils pour nommer les objets__ : 
- + ne commencez pas par un chiffre ou un symbole.
- + certains mots sont interdits 
- + soyez cohérent avec votre __style de codage__ ! 
- + évitez les points
- + __nommez les fonctions comme des verbes et les objets comme des noms__
-
---
-
-+ vous pouvez voir quels objets sont enregistrés dans l'espace de travail en utilisant `ls()`
++ Vous pouvez voir quels objets sont enregistrés dans l'espace de travail en utilisant `ls()`
 
 ---
 
@@ -275,11 +234,10 @@ class:middle, inverse, center
 
 + __vous pouvez perdre la trace de la manière dont vous avez créé les objets dans l'espace de travail__
 
---
 
 --
 
-+ `#bonnes pratiques` ne pas enregistrer l'espace de travail
++ `#Bonnes pratiques` ne pas enregistrer l'espace de travail
 
 ---
 background-image:url("figs/0a_setup.png")
@@ -287,214 +245,6 @@ background-size: 60%
 background-position: 100% 100%
 
 .pull-left[in the general options]
-
----
-class: inverse, middle, center
-# fonctions, arguments et compréhension de l'aide
-
----
-## fonctions et arguments
-
-```
-weight_kg <- sqrt(10)
-
-round(3.14159)
-
-args(round)
-```
-
----
-## si vous connaissez le nom de la fonction
-
-```
-help(function)
-?function
-args(function)
-```
-
-+ sélectionnez le nom de la fonction et cliquez sur  __F1__
-
-Vérifiez la structure du fichier d'aide :
-
-+ Description
-+ Utilisation
-+ Arguments
-+ Détails
-
----
-## si vous ne connaissez pas le nom de la fonction
-
-```
-??kruskal
-```
-
-(ou faites une recherche - sur Google - sur duckduckgo)
-
----
-## la structure d'une fonction aide
-
-`args(function)`
-
-+ Les arguments d'une fonction sont codés :
-  + dans l'ordre
-  + avec ou sans paramètres par défaut
-  
---
-
-Vous pouvez soit
-+ utiliser les arguments dans l'ordre, sans les nommer
-+ utiliser les premiers arguments sans les nommer, puis certains arguments facultatifs, avec leur nom
-
-
----
-## Types de données dans R
-
-<small>
-```{r datatypes}
-animals  <- c("mouse", "rat", "dog")
-weight_g <- c(50, 60, 65, 82)
-```
-
---
-
-```{r remedy003}
-class(animals)
-```
-
---
-
-```{r class}
-class(weight_g)
-```
-</small>
-
---
-
-`character` and `numeric` but also `logical` and `integer` ("whole" numbers, with no decimal component, in N), `complex`, and others. 
-
----
-class: center, middle
-
-`r icons::icon_style(icons::fontawesome("laptop-code"), scale = 3)`
-
----
-## sous-ensembles de vecteurs
-
-+ R est __indexé à partir de 1__ et les intervalles sont fermés (et non semi-ouverts).
-
-```{r, results = 'show'}
-animals <- c("mouse", "rat", "dog", "cat")
-animals[2]
-```
-
-+ La création de sous-ensembles s'effectue à l'aide des crochets `[]`
-
-```{r subset}
-animals[c(3, 2)]
-```
-
----
-## sous-ensemble conditionnel
-
-```{r, results = 'show'}
-weight_g <- c(21, 34, 39, 54, 55)
-weight_g[c(TRUE, FALSE, FALSE, TRUE, TRUE)]
-```
-
-Personne ne travaille ainsi, nous utilisons plutôt __clauses logiques__ pour __générer__ ces vecteurs logiques
-
----
-
-
-## clauses logiques
-
-+ égalité ou non `==`, `!=`
-+ inégalités: `<`. `>`, `<=`, `>=`
-+ union (OU) `|`
-+ intersection (AND) `&`
-+ appartenance `%in%`
-+ différences entre les ensembles: `setdiff()`
-+ la négation fonctionne `!`: "pas dans" `!a %in% b`
-
----
-## comparaison de vecteurs
-
-<small>
-```{r recycling}
-
-animals      <- c("mouse", "rat", "dog", "cat")
-more_animals <- c("rat", "cat", "dog", "duck", "goat")
-
-animals %in% more_animals
-```
-
----
-##comparaison de vecteurs
-
-<small>
-```{r recycling2}
-animals      <- c("mouse", "rat", "dog", "cat")
-more_animals <- c("rat", "cat", "dog", "duck", "goat")
-
-animals == more_animals
-```
-
-+ Les vecteurs sont comparés __un par un ET recyclés__ lorsque l'un d'eux est plus court, donc utilisez `%in%` lorsque vous voulez vérifier __l'appartenance à un ensemble__
-
-
----
-## données manquantes
-
-<small>
-```{r na}
-heights <- c(2, 4, 4, NA, 6)
-mean(heights)
-max(heights)
-mean(heights, na.rm = TRUE)
-max(heights, na.rm = TRUE)
-```
-
----
-
-## structures de données
-
-+ __vector__ : tableaux linéaires (une dimension : longueur uniquement)
-
---
-
-+ __factors__ : vecteurs (unidimensionnels) représentant des __variables catégorielles__ et ayant donc des __niveaux__
-
---
-
-+ __matrices__ : tableaux de vecteurs -> du même type (tous numériques ou tous caractères, par exemple) (deux dimensions : largeur et longueur)
-
---
-
-+ __data frames__ : tableaux bidimensionnels mais pouvant être de types combinés (c'est-à-dire colonne 1 avec des noms, colonne 2 avec des nombres)
-
---
-
-+ __arrays__ sont similaires aux matrices et aux dataframes mais peuvent être tridimensionnels (dataframes "en couches")
-
---
-
-+ __list__ : littéralement une liste de n'importe quoi (une liste de dataframes ou d'objets différents)
-
---
-
----
-class: inverse, middle, center
-
-# Obtenir de l'aide dans R
-
----
-
----
-## Autres sources d'aide
-
-+ Vues des tâches
-
-[https://cran.r-project.org/web/views/](https://cran.r-project.org/web/views/)
 
 
 ---
