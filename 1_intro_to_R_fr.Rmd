@@ -1,11 +1,6 @@
 ---
-title: "Introduction à R et RStudio"
-subtitle: "Analyse et visualisation de données sur R"
-author: 
-  - "Andrea Sánchez-Tapia"
-  - "Rocío Joo"
-institute: "Global Fishing Watch"
-date: '27 octobre 2025'
+title: "Analyse de données AIS de Global Fishing Watch avec R"
+subtitle: "Séance 3: Introduction à l'analyse reproductible de données avec R"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css"]
@@ -56,62 +51,52 @@ xaringanthemer::style_duo_accent(
   header_font_google = google_font("Roboto Condensed"),
   text_font_google   = google_font("Roboto Condensed", "300", "300i"),
   code_font_google   = google_font("Roboto Mono"),
-  text_font_size = "30px",
+  text_font_size = "40px",
   code_font_size = "30px",
   )
 #xaringanExtra::use_share_again()
 ```
++ Analyses reproductibles de données avec R
+--
 
-+ Introduction à R et RStudio
-+ Commencer avec les données
-+ Analyse exploratoire des données et statistiques de base avec R
-+ Manipulation des tableaux de données avec __dplyr__
-+ Visualisation des données avec `ggplot2`
++ Comment organizer une __séance de travail__ avec R et RStudio: bonnes pratiques et quelques considérations
+--
+
++ Installation de R, RStudio, `gfwr` et autres packages
+--
+
++ Brève intro à R avec des données réelles
+
 
 ---
 class: inverse, middle, center
 
-#  Introduction à R et RStudio
+# Analyses reproductibles de données avec R
 
 ---
 
-## Pourquoi apprendre le langage `R`?
+## Pourquoi apprendre et utiliser `R`?
 
-+ Le langage de prédilection des statisticiens et des chercheurs dans plusieurs domaines
-
++ **Software _libre_**: _gratuit_ et _libre_ d'être utilisé et modifié -> l'un des piliers de la __science ouverte__.
 --
 
-+ **Software _libre_**: _gratuit_ et _libre_ d'être utilisé et modifié -> l'un des piliers de la __science ouverte__
-
++ __Basé sur des scripts__: reproductibilité, __transparence__, suivi des erreurs, excellent moyen d'apprendre les méthodes.
 --
 
-+ __Basé sur des scripts__: reproductibilité, grand volume de données et analyses, __transparence__, suivi des erreurs, excellent moyen d'apprendre les méthodes.
++ __Interdiciplinaire et modulaire:__ Le langage de prédilection des statisticiens et des chercheurs dans plusieurs domaines: code écrit par les spécialistes.
 
---
 
-+ __Interdisciplinaire et modulaire__ : beaucoup de code écrit par des spécialistes du domaine. Au cœur de sa philosophie se trouve une transition en douceur de l'utilisateur au programmeur.
-
---
-
-+ __Communication__ avec d'autres outils : manuscrits, présentations, applications, rapports
 
 ---
-## Pourquoi apprendre `R` ?
+## Pourquoi apprendre et utiliser `R`?
 
-+ Communication avec __d'autres langages de programmation__ (par exemple, `reticulate` pour exécuter des scripts Python) 
-
++ __Communication__ avec d'autres outils : manuscrits, présentations, applications, rapports et avec __d'autres langages de programmation__ (par exemple, `reticulate` pour exécuter des scripts Python) 
 --
 
 + Super __capacités graphiques__!
-
 --
 
-
-+ __Support officiel__ : plein de façons de trouver une aide dans la documentation, listes de diffusion
-
---
-
-+ __Une communauté active et accueillante__ :  listes de diffusion, Stack Overflow, [communauté RStudio](community.rstudio.com/), [groupes useR](https://r-community.github.io/user-groups/rugs.html), sections [.purple[R-Ladies+]](https://r-community.github.io/user-groups/rladies.html), communautés Slack, `#rstats`
++ __Support officiel et une communauté active et accueillante__:  listes de diffusion, Stack Overflow, [groupes useR](https://r-community.github.io/user-groups/rugs.html), sections [.purple[R-Ladies+]](https://r-community.github.io/user-groups/rladies.html), communautés Slack, `#rstats`
 
 
 ---
@@ -124,132 +109,145 @@ class: inverse, middle, center
 
 + Les autres packages sont créés par la communauté et hébergés dans __CRAN__ (The Comprehensive `R` Archive Network), Bioconductor, __GitHub__ et rOpenSci.org's R-Universe
 
---
-
-+ Pour installer des packages depuis CRAN : `install.packages("dplyr")`
-
-+ Pour installer des packages depuis GitHub:`remotes::install_github("GlobalFishingWatch/gfwr")`
-
----
-
-+ Pour installer des packages depuis R-universe:
-
-<small>
-
-```r
-install.packages("gfwr", 
-repos = c("https://globalfishingwatch.r-universe.dev",
-"https://cran.r-project.org"))`
-```
-
----
-background-image:url("figs/00_rstudio.png")
-background-size: 70%
-background-position: 90% 90%
-
-# Exécuter R dans RStudio
-
-
-`r icons::fontawesome("laptop-code")`
-
 ---
 class: inverse, middle, center
-# Configuration et organisation du projet
+
+#  Comment organizer une __séance de travail__ avec R et RStudio: bonnes pratiques et quelques considérations
+
 
 ---
-## Répertoire de travail
+## Où travailler? Le répertoire de travail ("_working directory_")
 
-+ Vous devez indiquer à R où vous allez travailler, afin qu'il sache où lire les fichiers, où enregistrer les résultats, etc. : __répertoire de travail__
-
---
-
-+ `getwd()` dans la console
+- S'organizer en faisant appel à la *structure hierarchique de dossiers et fichiers* du système d'exploitation ("l'arborescence": la hiérarchie)
 
 --
 
-+ La valeur par défaut est __"home "__ : vérifiez les options générales et l'onglet "Fichier"
-
-
---
-
-+ Vous pouvez indiquer à R et RStudio où vous souhaitez travailler avec `setwd()`
++ Nos devons indiquer à R où nous allons travailler, afin qu'il sache où lire les fichiers, où enregistrer les résultats, etc.: le __répertoire de travail__
 
 --
 
-+ Encore mieux : au lieu d'ouvrir RStudio, ouvrez un script __R__ ou un projet __RStudio__ (comme vous le feriez dans MS Word) `r icons::fontawesome("file-word")`)
++ Utiliser __un seul dossier pour chaque projet__. 
 
 ---
-## Organisation des projets et meilleures pratiques
+## Où travailler? Le répertoire de travail ("_working directory_")
 
-+ Les projets sont mieux organisés si nous utilisons __un dossier par projet__ et  __des sous-dossiers__ dans notre répertoire de travail
 
---
-
-+ Nous ne devrions pas modifier des __fichiers de données brutes__ mais plutôt __enregistrer les données traitées__ dans un autre fichier (et les scripts correspondants qui ont modifié les données)
++ R a une valeur déterminée: vérifiez les options générales
 
 --
 
-+ Éviter les chemins absolus: `C:users/your_name/your_file_structure/your_working_directory`
++ À tout moment, on peut demander où on travaille: `getwd()` (_"get working directory"_)
 
 --
 
-+ Au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__ :
++ On pourrait dire à R où travailler (`setwd()`) mais il y a une meilleure option qu'on verra tout de suite. 
 
-  + `.` "ici"
-  + `./figs` un sous-dossier appelé `figs`
-  + le niveau supérieur `..`
+---
+## Chemins absolus et relatifs 
+
++ Les chemins absolus son uniques à chaque personne/ordinateur
+
+`C:\Documents\Andrea\example` Sur Windows
+
+--
+
+`/home/andrea/Documents` Sur d'autres systèmes d'exploitation (mac, Linux)
+
+--
+
++ Si nous partageons du code qui utilise des chemins absolus les autres ne pourront pas le tourner: __problème de reproductibilité__ 
+
+---
+## Chemins absolus: Que faire? 
+
+Au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__:
+
+--
+
++ `.` "ici"
   
+--
+  
++ `./figs` un sous-dossier appelé `figs`
+  
+--
+  
++ `./figs/figure.png` un fichier dans `figs`
+  
+
 ---
-class: inverse, middle, center
+## L'espace de travail (_workspace_)
+
+Pendant une __séance de travail__ sur R, on ne tourne pas un code directement sur la console, mais on utilise des __*scripts*__, fichiers avec l'extension __.R__ avec toutes les commandes qui seront éxécutées. 
+
+- Lire des fichiers d'entrée qui sont gardés dans le disque dur (optionel)
+--
+
+- Créer des __objets__: éxécuter des fonctions, des analyses, des figures
+--
+
+- Souvent, écrire les résultats ou sauver les figures sur le disque dur
+
+
+
+---
+## L'espace de travail (_workspace_)
+
+- Les objets crées pendant la séance occupent la mémoire RAM: l'__espace de travail__.
+--
+
++ L'espace de travail peut être enregistré et chargé entre les séances, __MAIS vous pouvez perdre la trace de la manière dont vous les avez créés__.
+--
+
++ Avoir un script solide et complet est __essentiel__ pour une séance organisée
+--
+
++ Sauver le _workspace_ est secondaire et __fortement déconseillé__.
+
+---
+## D'autres considérations
+
+- __Ne pas modifier les fichiers de données brutes__, mais plutôt enregistrer les données traitées dans un autre fichier et __garder les scripts__ qui ont modifié les données 
+
+--
+
+- Commenter le code (avec `#`) est utile, mais la __documentation claire et complète__ est toujours clé. Metadonnées, méthodes, réferences, erreurs rencontrées sur le chemin...
+
+---
+class: inverse, middle
+## `#bonnespratiques`
+ 
+1. Un seul dossier, clarté sur le répertoire de travail
+1. Chemins absolus et relatifs
+1. Confier aux scripts, pas à l'espace de travail
+1. Ne pas modifier les données brutes
+1. Documentation sur les méthodes employées, commentaires accompagnant le code
+
+---
+class: inverse, middle
+
+## Installation de `gfwr` et d'autres packages
+
+1. Installer R et RStudio
+1. Créer un compte Global Fishing Watch
+1. Gérer un token API (avez vou décrit pourquoi vous créez ce token?)
+1. Ajouter le token à la séance R
+1. Installer `gfwr` et les autres packages
+1. Executer un code de test
+
+
+---
+class: inverse, middle
 
 ## Projets RStudio
 
-Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets
+- Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets et signale a RStudio où ke travail sera fait
 
----
-## Introduction à R
-
-+ `<-` est l'opération pour créer des objets, qui sont sauvés temporairement dans l'espace de travail (le _workspace_)
-(`Alt + -`)
-
---
-
-+ Le remplacement d'objets __n'affecte pas les autres objets__
-
---
-
-+ Vous pouvez voir quels objets sont enregistrés dans l'espace de travail en utilisant `ls()`
-
----
-
-## À propos de l'espace de travail
-
-+ R crée des __objets__ qui occupent la mémoire RAM : l' __espace de travail__
-
---
-
-+ L' __espace de travail__ peut être enregistré et chargé entre les sessions, MAIS
-
---
-
-+ __vous pouvez perdre la trace de la manière dont vous avez créé les objets dans l'espace de travail__
-
-
---
-
-+ `#Bonnes pratiques` ne pas enregistrer l'espace de travail
-
----
-background-image:url("figs/0a_setup.png")
-background-size: 60%
-background-position: 100% 100%
-
-.pull-left[in the general options]
-
+- RStudio lira et comprendra que le répertoire de travail est celui que vous avez choisi. 
 
 ---
 class: center, middle
-# ¡Thanks!
+# Merci!
 
 Ce module a été adapté à partir de documents antérieurs créés par [¡liibre!](https://github.com/liibre)
 
