@@ -218,7 +218,7 @@ class: inverse, middle
 ## `#bonnespratiques`
  
 1. Un seul dossier, clarté sur le répertoire de travail
-1. Chemins absolus et relatifs
+1. Une structure claire du dossier, et des chemins relatifs dans le code 
 1. Confier aux scripts, pas à l'espace de travail
 1. Ne pas modifier les données brutes
 1. Documentation sur les méthodes employées, commentaires accompagnant le code
@@ -241,9 +241,11 @@ class: inverse, middle
 
 ## Projets RStudio
 
-- Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets et signale a RStudio où ke travail sera fait
+- Les projets RStudio créent un fichier __.Rproj__ dans votre dossier qui sert de raccourci pour vos projets et signale a RStudio où la séance aura lieu
 
 - RStudio lira et comprendra que le répertoire de travail est celui que vous avez choisi. 
+
+- Nous avons préparé un exemple
 
 ---
 class: center, middle
