@@ -158,7 +158,7 @@ class: inverse, middle, center
 + Si nous partageons du code qui utilise des chemins absolus les autres ne pourront pas le tourner: __problème de reproductibilité__ 
 
 ---
-## Chemins absolus: Que faire? 
+## Chemins absolus: Quoi faire? 
 
 Au lieu de __chemins absolus__ nous devrions utiliser des __chemins relatifs__:
 
@@ -217,9 +217,9 @@ Pendant une __séance de travail__ sur R, on ne tourne pas un code directement s
 class: inverse, middle
 ## `#bonnespratiques`
  
-1. Un seul dossier, clarté sur le répertoire de travail
+1. Un dossier principal, clarté sur le répertoire de travail
 1. Une structure claire du dossier, et des chemins relatifs dans le code 
-1. Confier aux scripts, pas à l'espace de travail
+1. Faire confiance aux scripts, pas à l'espace de travail
 1. Ne pas modifier les données brutes
 1. Documentation sur les méthodes employées, commentaires accompagnant le code
 
